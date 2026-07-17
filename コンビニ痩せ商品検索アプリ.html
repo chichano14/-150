@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>コンビニ痩せ商品150選</title>
+<style>
+  :root{
+    --brand:#EE7623; --brand2:#2E7D6B;
+    --bg:#F7F5EC; --card:#FFFFFF; --ink:#2B3A45; --muted:#8A95A0;
+    --line:#ECE7D8; --chip:#F0EEE4;
+    --seven:#FF7A00; --lawson:#0068B7; --famima:#009A44;
+    --shadow:0 4px 16px rgba(43,58,69,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{overflow-x:hidden}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,system-ui,sans-serif;
+    line-height:1.6; -webkit-text-size-adjust:100%;
+  }
+  header{
+    background:var(--bg); border-bottom:3px solid var(--brand);
+    padding:14px 16px 12px; position:sticky; top:0; z-index:20;
+  }
+  .brand{font-size:12px; font-weight:700; color:var(--brand); letter-spacing:.08em}
+  h1{margin:2px 0 2px; font-size:22px; letter-spacing:.02em}
+  .sub{font-size:12px; color:var(--muted)}
+  .storeicons{display:flex; gap:8px; margin:0 0 8px}
+  .sicon{position:relative; overflow:hidden; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:15px; box-shadow:var(--shadow)}
+  .sicon.seven{background:var(--seven)}
+  .sicon.lawson{background:var(--lawson)}
+  .sicon.famima{background:var(--famima)}
+  .sicon img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+  .guide{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+  .guide span{background:#fff; border:1px solid var(--line); border-radius:999px; padding:5px 12px; font-size:12px; font-weight:700; box-shadow:var(--shadow)}
+  .guide b{color:var(--brand)}
+  .guide .g2 b{color:var(--brand2)}
+  .controls{max-width:1100px; margin:14px auto 0; padding:0 16px}
+  .stores{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px}
+  .storebtn{border:1.5px solid var(--line); background:#fff; color:var(--ink); border-radius:999px; padding:8px 16px; font-size:13px; font-weight:700; cursor:pointer; transition:.15s; box-shadow:var(--shadow)}
+  .storebtn[data-active="1"]{color:#fff; border-color:transparent}
+  .storebtn.all[data-active="1"]{background:var(--ink)}
+  .storebtn.seven[data-active="1"]{background:var(--seven)}
+  .storebtn.lawson[data-active="1"]{background:var(--lawson)}
+  .storebtn.famima[data-active="1"]{background:var(--famima)}
+  .row{display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end}
+  .field{flex:1 1 200px; min-width:140px}
+  label.lbl{font-size:11px; color:var(--muted); font-weight:700; display:block; margin:0 0 3px 2px}
+  select,input[type="search"]{width:100%; border:1.5px solid var(--line); border-radius:12px; padding:11px 12px; font-size:16px; background:#fff; color:var(--ink); font-family:inherit}
+  input[type="search"]:focus,select:focus{outline:none; border-color:var(--brand)}
+  .count{max-width:1100px; margin:14px auto 0; padding:0 16px; font-size:13px; color:var(--muted)}
+  .count b{color:var(--ink); font-size:16px}
+  .grid{max-width:1100px; margin:10px auto 40px; padding:0 16px; display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px}
+  .cardproduct{background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); display:flex; flex-direction:column}
+  .thumb{position:relative; aspect-ratio:16/10; display:flex; align-items:center; justify-content:center; background:#fbfaf5}
+  .thumb .emoji{font-size:52px; line-height:1}
+  .thumb img{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; display:block; padding:6px; background:#fff}
+  .badge-store{position:absolute; top:8px; left:8px; color:#fff; font-size:11px; font-weight:700; padding:3px 9px; border-radius:999px; z-index:2}
+  .badge-store.seven{background:var(--seven)}
+  .badge-store.lawson{background:var(--lawson)}
+  .badge-store.famima{background:var(--famima)}
+  .badge-check{position:absolute; top:8px; right:8px; background:#fff7ed; color:#b45309; border:1px solid #fed7aa; font-size:10px; font-weight:700; padding:2px 7px; border-radius:999px; z-index:2}
+  .pbody{padding:11px 12px 13px; display:flex; flex-direction:column; gap:8px; flex:1}
+  .cat{align-self:flex-start; background:var(--chip); color:#5c6670; font-size:11px; font-weight:700; padding:3px 9px; border-radius:999px}
+  .pname{font-size:14.5px; font-weight:700; line-height:1.35; min-height:2.7em}
+  .stats{display:grid; grid-template-columns:1fr 1fr; gap:6px}
+  .stat{background:#faf9f3; border:1px solid var(--line); border-radius:9px; padding:5px 8px; text-align:center}
+  .stat .k{font-size:10px; color:var(--muted); font-weight:700}
+  .stat .v{font-size:15px; font-weight:800}
+  .stat .v small{font-size:10px; font-weight:700}
+  .stat.kcal .v{color:var(--brand)}
+  .stat.pro .v{color:var(--brand2)}
+  .note{font-size:11.5px; color:#6b7680; line-height:1.5}
+  .empty{max-width:1100px; margin:30px auto; padding:0 16px; text-align:center; color:var(--muted)}
+  footer{border-top:1px solid var(--line); padding:18px 16px 40px; font-size:11.5px; color:var(--muted); max-width:1100px; margin:0 auto; line-height:1.7}
+  code{background:#efece0; padding:1px 5px; border-radius:5px; font-size:11px}
+
+  /* ===== スマホ最適化 ===== */
+  @media (max-width:560px){
+    header{padding:12px 14px 10px}
+    h1{font-size:19px}
+    .controls{margin-top:12px; padding:0 12px}
+    .field{flex:1 1 46%; min-width:120px}
+    .field.wide{flex:1 1 100%}
+    .count{padding:0 12px}
+    .grid{grid-template-columns:repeat(2,1fr); gap:10px; padding:0 12px}
+    .thumb .emoji{font-size:38px}
+    .pbody{padding:9px 9px 11px; gap:6px}
+    .pname{font-size:12.5px; min-height:2.6em}
+    .cat{font-size:10px; padding:2px 7px}
+    .stat{padding:4px 5px}
+    .stat .v{font-size:12.5px}
+    .stat .k{font-size:9px}
+    .note{font-size:10.5px}
+    .storebtn{padding:7px 13px; font-size:12px}
+    .sicon{width:30px; height:30px; font-size:14px}
+    .guide span{font-size:11px; padding:4px 10px}
+  }
+  @media (max-width:340px){ .grid{grid-template-columns:1fr} }
+  /* PCではヘッダー（アイコン＋タイトル）を中央寄せ */
+  @media (min-width:561px){
+    header{text-align:center}
+    .storeicons{justify-content:center}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="storeicons" aria-label="対応コンビニ：セブン・ローソン・ファミマ">
+    <span class="sicon seven" title="セブン-イレブン">7<img src="商品画像/icon_seven.png" alt="" loading="lazy" onerror="this.remove()"></span>
+    <span class="sicon lawson" title="ローソン">L<img src="商品画像/icon_lawson.png" alt="" loading="lazy" onerror="this.remove()"></span>
+    <span class="sicon famima" title="ファミリーマート">F<img src="商品画像/icon_famima.png" alt="" loading="lazy" onerror="this.remove()"></span>
+  </div>
+  <h1>コンビニ痩せ商品150選</h1>
+</header>
+
+<div class="controls">
+  <div class="stores" id="stores"></div>
+  <div class="row">
+    <div class="field">
+      <label class="lbl" for="cat">カテゴリ</label>
+      <select id="cat"><option value="">すべてのカテゴリ</option></select>
+    </div>
+    <div class="field">
+      <label class="lbl" for="sort">並び替え</label>
+      <select id="sort">
+        <option value="def">おすすめ順</option>
+        <option value="kcal">カロリーが低い順</option>
+        <option value="pro">たんぱく質が多い順</option>
+        <option value="fat">脂質が低い順</option>
+      </select>
+    </div>
+    <div class="field wide">
+      <label class="lbl" for="q">商品名で検索</label>
+      <input id="q" type="search" placeholder="例：サラダチキン／おにぎり／スープ">
+    </div>
+  </div>
+</div>
+
+<div class="count" id="count"></div>
+<div class="grid" id="grid"></div>
+<div class="empty" id="empty" style="display:none">条件に合う商品が見つかりませんでした。<br>フィルターを変えてみてください。</div>
+
+<footer>
+  ※掲載のカロリー・たんぱく質などの栄養値はあくまで参考です。取り扱い・規格・栄養成分は時期や店舗によって変わるため、実際の数値は購入時に商品パッケージや各社公式サイトで必ずご確認ください。<br>
+  ※商品写真の出典：各コンビニ（セブン‑イレブン／ローソン／ファミリーマート）公式サイト。掲載内容は各社の商品情報を参照しています。
+</footer>
+
+<script>
+/* =========================================================================
+   商品データ（各社50品・計150）
+   id    : 画像ファイル名に対応（商品画像/<id>.jpg を自動読み込み）
+   store : 'seven' | 'lawson' | 'famima'
+   cat   : 'ご飯' | 'パン' | '麺' | '主菜' | 'サラダ' | '副菜' | 'スープ'
+   kcal,p(たんぱく質),f(脂質),c(炭水化物)
+   note  : ひとこと / ok : true=確認済 false=概算(要確認)
+   img   : 個別に画像URL/パスを指定したい場合のみ記入（空ならidから自動）
+   ========================================================================= */
+const PRODUCTS = [
+  /* ===== セブンイレブン（01-34 は参考資料の確認済み数値） ===== */
+  {id:'seven_01',store:'seven',cat:'ご飯',name:'もち麦もっちり！塩こんぶ枝豆おむすび',kcal:162,p:4.7,f:1.4,c:34.1,note:'もち麦で食物繊維。枝豆の食感で食べごたえ◎',ok:true},
+  {id:'seven_02',store:'seven',cat:'ご飯',name:'おむすび2個入り（紅鮭・昆布）',kcal:319,p:6.7,f:2.0,c:70.2,note:'2個入りで主食量をまとめて確保。飽きにくい',ok:true},
+  {id:'seven_03',store:'seven',cat:'ご飯',name:'サーモンの寿司',kcal:198,p:5.9,f:2.8,c:37.8,note:'ビタミンD・DHA/EPAが摂れる',ok:true},
+  {id:'seven_04',store:'seven',cat:'ご飯',name:'炙り焼きさばとおだしごはん（弁当）',kcal:329,p:11.3,f:6.6,c:56.8,note:'さばはDHA/EPAが多い。だし風味でまとまる',ok:true},
+  {id:'seven_05',store:'seven',cat:'ご飯',name:'1/2日分の野菜がとれる玉子あんの中華丼',kcal:484,p:12.4,f:12.0,c:83.2,note:'あんが絡んで食べやすく野菜も◎',ok:true},
+  {id:'seven_06',store:'seven',cat:'ご飯',name:'しらすと明太子のごはん',kcal:331,p:9.2,f:2.0,c:69.7,note:'脂質がかなり少ない。塩気で食べやすい',ok:true},
+  {id:'seven_07',store:'seven',cat:'ご飯',name:'紅鮭明太子ごはん（弁当）',kcal:369,p:10.4,f:5.2,c:70.5,note:'脂質を抑えつつ炭水化物を確保',ok:true},
+  {id:'seven_08',store:'seven',cat:'ご飯',name:'シンガポールチキンライス',kcal:450,p:16.8,f:8.0,c:79.5,note:'鶏のうま味。冷めても食べやすい',ok:true},
+  {id:'seven_09',store:'seven',cat:'パン',name:'たんぱく質が摂れるチキン＆チリ',kcal:280,p:25.8,f:9.6,c:24.8,note:'主食なのにたんぱく質25g',ok:true},
+  {id:'seven_10',store:'seven',cat:'パン',name:'たんぱく質が摂れるチキンロール',kcal:239,p:27.8,f:4.3,c:23.5,note:'たんぱく質が多く炭水化物控えめ',ok:true},
+  {id:'seven_11',store:'seven',cat:'麺',name:'冷し中華',kcal:446,p:18.3,f:9.9,c:72.4,note:'酸味で食べやすく、麺類でもたんぱく質◎',ok:true},
+  {id:'seven_12',store:'seven',cat:'麺',name:'1/2日分の野菜が摂れる和風ちゃんぽん',kcal:424,p:16.2,f:11.2,c:67.5,note:'麺の中でも脂質控えめ。野菜も摂れる',ok:true},
+  {id:'seven_13',store:'seven',cat:'麺',name:'コクと旨味が広がるボンゴレスープパスタ',kcal:436,p:24.2,f:9.4,c:66.0,note:'あさり入りでたんぱく質が多い',ok:true},
+  {id:'seven_14',store:'seven',cat:'主菜',name:'7プレミアム 炭火焼鳥4種盛り',kcal:141,p:16.1,f:8.3,c:0.6,note:'4種で味変。たんぱく質の追加に',ok:true},
+  {id:'seven_15',store:'seven',cat:'主菜',name:'7プレミアム 焼鳥ももたれ',kcal:154,p:19.8,f:5.7,c:6.1,note:'たれ味で食べやすくたんぱく質20g',ok:true},
+  {id:'seven_16',store:'seven',cat:'主菜',name:'7プレミアム 炭火焼やげん軟骨',kcal:82,p:17.2,f:0.8,c:2.3,note:'脂質がかなり低い。コリコリ食感',ok:true},
+  {id:'seven_17',store:'seven',cat:'主菜',name:'7プレミアム 赤魚の煮付',kcal:153,p:25.6,f:3.2,c:5.5,note:'たんぱく質が多く脂質は控えめ',ok:true},
+  {id:'seven_18',store:'seven',cat:'主菜',name:'7プレミアム ほっけの塩焼',kcal:121,p:16.4,f:6.1,c:0.1,note:'塩焼きで食べやすい。脂質控えめ',ok:true},
+  {id:'seven_19',store:'seven',cat:'主菜',name:'冷製国産鶏レバー煮',kcal:154,p:19.0,f:5.3,c:7.6,note:'冷たいまま食べられる。ビタミンA豊富',ok:true},
+  {id:'seven_20',store:'seven',cat:'主菜',name:'ポン酢で食べる砂ずりと玉ねぎ',kcal:69,p:12.5,f:0.9,c:3.0,note:'脂質がかなり控えめ。ポン酢で◎',ok:true},
+  {id:'seven_21',store:'seven',cat:'主菜',name:'たんぱく質10g カニカマバー',kcal:80,p:10.9,f:0.5,c:8.3,note:'1本でたんぱく質約10g。脂質低い',ok:true},
+  {id:'seven_22',store:'seven',cat:'サラダ',name:'たんぱく質が摂れる鶏むね肉サラダ',kcal:199,p:21.8,f:10.9,c:4.4,note:'鶏むねしっかり。サラダでもP確保',ok:true},
+  {id:'seven_23',store:'seven',cat:'サラダ',name:'たんぱく質が摂れる蒸し鶏のサラダ',kcal:148,p:19.1,f:2.9,c:12.5,note:'脂質控えめでたんぱく質約20g',ok:true},
+  {id:'seven_24',store:'seven',cat:'サラダ',name:'たんぱく質が摂れる豚しゃぶサラダ',kcal:226,p:21.0,f:13.4,c:6.3,note:'ドレッシングの種類に注意',ok:true},
+  {id:'seven_25',store:'seven',cat:'副菜',name:'たんぱく質が取れる温玉キムチ納豆',kcal:177,p:15.5,f:10.7,c:6.3,note:'納豆と温玉でP、食物繊維も◎',ok:true},
+  {id:'seven_26',store:'seven',cat:'副菜',name:'7プレミアム 味付き半熟ゆでたまご（1個）',kcal:65,p:5.8,f:4.3,c:0.7,note:'そのまま食べやすい。Pを少し足せる',ok:true},
+  {id:'seven_27',store:'seven',cat:'副菜',name:'7種具材のお豆腐とひじきの煮物',kcal:110,p:8.0,f:5.2,c:10.1,note:'豆腐でP、ひじきで食物繊維',ok:true},
+  {id:'seven_28',store:'seven',cat:'副菜',name:'沖縄県産太もずくとカニカマサラダ',kcal:59,p:2.1,f:0.6,c:12.5,note:'水溶性食物繊維。血糖値ゆるやかに',ok:true},
+  {id:'seven_29',store:'seven',cat:'副菜',name:'7プレミアム たこぶつ',kcal:45,p:9.1,f:0.5,c:1.0,note:'噛みごたえあり。低脂質でP',ok:true},
+  {id:'seven_30',store:'seven',cat:'スープ',name:'1/3日分の野菜 もっちり餃子スープ',kcal:162,p:11.0,f:7.3,c:15.7,note:'餃子入りで食べごたえ。低脂質',ok:true},
+  {id:'seven_31',store:'seven',cat:'スープ',name:'4種のだし使用 8種具材の豚汁',kcal:138,p:7.8,f:8.5,c:9.2,note:'根菜で食べごたえ。野菜を補える',ok:true},
+  {id:'seven_32',store:'seven',cat:'スープ',name:'旨辛スンドゥブチゲ',kcal:171,p:14.9,f:7.9,c:11.4,note:'豆腐でP。辛みで満足感',ok:true},
+  {id:'seven_33',store:'seven',cat:'スープ',name:'7プレミアム 参鶏湯',kcal:268,p:14.7,f:7.8,c:36.3,note:'もち米入りで主食感。うま味で満足',ok:true},
+  {id:'seven_34',store:'seven',cat:'スープ',name:'国産黄金生姜 ポカポカ和風スープ',kcal:120,p:8.2,f:3.5,c:15.3,note:'生姜で温まりやすく代謝アップも',ok:true},
+  /* seven 追加（35-50 概算・要確認） */
+  {id:'seven_35',store:'seven',cat:'ご飯',name:'十六穀ごはんおむすび（枝豆）',kcal:199,p:4.9,f:1.3,c:42,note:'雑穀で食物繊維・噛みごたえ',ok:true},
+  {id:'seven_36',store:'seven',cat:'ご飯',name:'手巻おにぎり 焼たらこ',kcal:172,p:5.1,f:1.0,c:36.6,note:'脂質控えめの定番。主食のベースに',ok:true},
+  {id:'seven_37',store:'seven',cat:'ご飯',name:'鶏五目ごはんおむすび',kcal:180,p:4.6,f:1.4,c:38.1,note:'具入りで満足感。あっさり',ok:true},
+  {id:'seven_38',store:'seven',cat:'パン',name:'たんぱく質が摂れるチキン＆エッグサンド',kcal:245,p:20.5,f:8.4,c:23.1,note:'主食でたんぱく質20g。チキン＆エッグで満足',ok:true},
+  {id:'seven_39',store:'seven',cat:'主菜',name:'サラダチキンバー スモークペッパー',kcal:100,p:20.2,f:1.9,c:0.5,note:'片手でたんぱく質20g・糖質0の王道',ok:true},
+  {id:'seven_40',store:'seven',cat:'麺',name:'たんぱく質が摂れる 蒸し鶏の中華そば（冷）',kcal:338,p:14.0,f:9.2,c:51.6,note:'高たんぱくの冷し麺。1食完結',ok:true},
+  {id:'seven_41',store:'seven',cat:'麺',name:'手打ち風 ざるそば',kcal:334,p:16.3,f:3.0,c:63.1,note:'低脂質でさっぱり。軽めの主食に',ok:true},
+  {id:'seven_42',store:'seven',cat:'主菜',name:'サラダチキン プレーン',kcal:113,p:24.8,f:1.1,c:1.2,note:'糖質ほぼ0の高たんぱく低脂質。1品足しに',ok:true},
+  {id:'seven_43',store:'seven',cat:'主菜',name:'サラダチキン（ハーブ）',kcal:108,p:23.6,f:1.5,c:1.0,note:'ハーブ風味で飽きにくい。糖質0の高たんぱく低脂質',ok:true},
+  {id:'seven_44',store:'seven',cat:'副菜',name:'豆腐スイーツバー ガトーショコラ',kcal:81,p:6.0,f:2.2,c:9.9,note:'甘いのにたんぱく質＆低脂質。デザート代わりに',ok:true},
+  {id:'seven_45',store:'seven',cat:'サラダ',name:'ブロッコリーと半熟卵のサラダ',kcal:141,p:18.4,f:5.5,c:6.0,note:'ブロッコリー＆卵で満足感',ok:true},
+  {id:'seven_46',store:'seven',cat:'副菜',name:'おでん盛り（大根・卵・こんにゃく）',kcal:94,p:7.1,f:5.0,c:5.2,note:'低カロリーで温かい。夜遅めに',ok:true},
+  {id:'seven_47',store:'seven',cat:'副菜',name:'冷奴（薬味付き）',kcal:116,p:10.1,f:6.9,c:3.7,note:'植物性たんぱく。あと一品に',ok:true},
+  {id:'seven_48',store:'seven',cat:'主菜',name:'ねぎ塩鶏はらみ ゆずポン酢付',kcal:190,p:18.9,f:12.2,c:1.2,note:'鶏はらみで高たんぱく。ゆずポン酢でさっぱり',ok:true},
+  {id:'seven_49',store:'seven',cat:'副菜',name:'おつまみ冷奴 よだれ鶏',kcal:238,p:23.4,f:9.9,c:14.7,note:'よだれ鶏だれの冷奴。たんぱく質しっかり',ok:true},
+  {id:'seven_50',store:'seven',cat:'主菜',name:'緑黄色野菜がとれる鶏団子のトマト煮',kcal:218,p:18.3,f:8.5,c:19.2,note:'鶏団子＋野菜のトマト煮でたんぱく質しっかり',ok:true},
+
+  /* ===== ローソン（概算・要確認） ===== */
+  {id:'lawson_01',store:'lawson',cat:'麺',name:'冷製生パスタ 鶏と和風梅だしジュレ',kcal:380,p:23.1,f:10.4,c:50.3,note:'冷製パスタで高たんぱく。梅だしでさっぱり',ok:true},
+  {id:'lawson_02',store:'lawson',cat:'ご飯',name:'もち麦入り 梅こんぶおむすび',kcal:170,p:4.2,f:2.0,c:38.0,note:'もち麦で食物繊維。さっぱり',ok:true},
+  {id:'lawson_03',store:'lawson',cat:'ご飯',name:'もち麦 塩昆布枝豆おにぎり',kcal:172,p:5.1,f:2.2,c:36.9,note:'もち麦＋枝豆で食物繊維◎さっぱり',ok:true},
+  {id:'lawson_04',store:'lawson',cat:'ご飯',name:'金しゃり 明太子おにぎり',kcal:197,p:5.7,f:1.2,c:41.3,note:'明太子でたんぱく質も少し。低脂質',ok:true},
+  {id:'lawson_05',store:'lawson',cat:'ご飯',name:'金しゃり 塩にぎり',kcal:198,p:2.9,f:1.1,c:44.6,note:'シンプルな塩むすび。主食のベース',ok:true},
+  {id:'lawson_06',store:'lawson',cat:'ご飯',name:'大きなおにぎり 新生姜と野沢菜（米粒麦入り）',kcal:240,p:5.3,f:1.6,c:52.8,note:'米粒麦入りで食物繊維。大きめで満足',ok:true},
+  {id:'lawson_07',store:'lawson',cat:'ご飯',name:'十六穀 鶏ごぼうおにぎり',kcal:223,p:6.0,f:2.9,c:43.5,note:'雑穀＋鶏ごぼうで食べごたえ・食物繊維',ok:true},
+  {id:'lawson_08',store:'lawson',cat:'サラダ',name:'たんぱく質が摂れる カニカマのサラダ',kcal:185,p:12.9,f:9.6,c:13.1,note:'カニカマ入りでたんぱく質が摂れるサラダ',ok:true},
+  {id:'lawson_09',store:'lawson',cat:'パン',name:'NL ブランパン 2個入',kcal:136,p:10.8,f:5.8,c:15.8,note:'糖質オフの定番（糖質約4g）。たんぱく質・食物繊維◎',ok:true},
+  {id:'lawson_10',store:'lawson',cat:'パン',name:'ブランのミニ食パン',kcal:104,p:7.2,f:2.1,c:16.0,note:'糖質控えめ。組み合わせのベースに',ok:true},
+  {id:'lawson_11',store:'lawson',cat:'麺',name:'1/2日分の野菜が摂れる あんかけ焼そば',kcal:362,p:15.5,f:11.3,c:52.4,note:'野菜たっぷりのあんかけ焼そば。1食完結',ok:true},
+  {id:'lawson_12',store:'lawson',cat:'麺',name:'1食分の野菜 冷しちゃんぽん',kcal:326,p:15.8,f:8.3,c:49.4,note:'1食分の野菜が摂れる冷しちゃんぽん',ok:true},
+  {id:'lawson_13',store:'lawson',cat:'麺',name:'野菜たっぷり ちゃんぽん',kcal:311,p:16.4,f:8.2,c:45.4,note:'野菜とたんぱく質をまとめて。1食完結',ok:true},
+  {id:'lawson_14',store:'lawson',cat:'麺',name:'たんぱく質が摂れる冷し中華',kcal:432,p:21.0,f:10.5,c:65.6,note:'具だくさんでたんぱく質20g前後',ok:true},
+  {id:'lawson_15',store:'lawson',cat:'麺',name:'手打ち風 ざるそば',kcal:352,p:21.2,f:3.4,c:62.3,note:'低脂質でさっぱり。軽めに',ok:true},
+  {id:'lawson_16',store:'lawson',cat:'麺',name:'ローカーボ 豆腐そうめん風',kcal:86,p:4.9,f:3.0,c:11.0,note:'糖質控えめ。軽めの日に',ok:true},
+  {id:'lawson_17',store:'lawson',cat:'主菜',name:'サラダチキン（プレーン）',kcal:141,p:30.3,f:2.1,c:0.2,note:'たんぱく質30gの高たんぱく低脂質。1品足しに最適',ok:true},
+  {id:'lawson_18',store:'lawson',cat:'主菜',name:'サラダチキン（ハーブ）',kcal:120,p:24.0,f:2.0,c:2.0,note:'ハーブ風味で飽きにくい。高たんぱく低脂質',ok:true},
+  {id:'lawson_19',store:'lawson',cat:'主菜',name:'サラダチキンスティック（プレーン）',kcal:66,p:11.4,f:1.0,c:3.0,note:'片手で食べられる間食のたんぱく質補給',ok:true},
+  {id:'lawson_20',store:'lawson',cat:'主菜',name:'でか焼き鳥 もも塩',kcal:124,p:14.7,f:6.9,c:0.7,note:'ボリューム◎。たんぱく質しっかり・低糖質',ok:true},
+  {id:'lawson_21',store:'lawson',cat:'主菜',name:'縞ほっけの塩焼',kcal:106,p:12.5,f:6.2,c:0.3,note:'塩焼きで低脂質・高たんぱくの魚。糖質0',ok:true},
+  {id:'lawson_22',store:'lawson',cat:'主菜',name:'炭火香る！鶏レバー焼',kcal:99,p:14.6,f:3.4,c:2.3,note:'鶏レバーで高たんぱく低脂質。鉄分も',ok:true},
+  {id:'lawson_23',store:'lawson',cat:'サラダ',name:'おろしポン酢で食べる 豚しゃぶサラダ',kcal:63,p:7.7,f:2.3,c:3.7,note:'豚しゃぶをさっぱり。低カロリーでたんぱく質',ok:true},
+  {id:'lawson_24',store:'lawson',cat:'サラダ',name:'たんぱく質が摂れる 国産鶏むね肉のサラダ',kcal:206,p:23.1,f:11.0,c:4.9,note:'鶏むねでたんぱく質23g。満足サラダ',ok:true},
+  {id:'lawson_25',store:'lawson',cat:'サラダ',name:'わかめとオクラのネバネバサラダ',kcal:38,p:1.1,f:0.0,c:9.7,note:'超低カロリー。水溶性食物繊維たっぷり',ok:true},
+  {id:'lawson_26',store:'lawson',cat:'主菜',name:'炭火焼鳥ささみ 柚子胡椒',kcal:127,p:24.2,f:2.3,c:2.5,note:'ささみで高たんぱく低脂質。柚子胡椒でさっぱり',ok:true},
+  {id:'lawson_27',store:'lawson',cat:'副菜',name:'半熟くんたま（味付半熟卵）',kcal:66,p:5.9,f:4.5,c:1.0,note:'たんぱく質をあと一歩足すのに便利',ok:true},
+  {id:'lawson_28',store:'lawson',cat:'副菜',name:'塩ゆで枝豆',kcal:111,p:9.0,f:5.0,c:7.0,note:'植物性たんぱく＋食物繊維。おやつ代わり',ok:true},
+  {id:'lawson_29',store:'lawson',cat:'副菜',name:'ひじきの煮物',kcal:49,p:2.7,f:1.1,c:8.6,note:'食物繊維・ミネラルの副菜',ok:true},
+  {id:'lawson_30',store:'lawson',cat:'副菜',name:'おでん たまご',kcal:77,p:6.7,f:4.9,c:1.4,note:'低カロリーでたんぱく質',ok:true},
+  {id:'lawson_31',store:'lawson',cat:'主菜',name:'ヤゲン軟骨焼（肉付き）',kcal:155,p:19.7,f:7.0,c:4.4,note:'軟骨のコリコリ食感。高たんぱく',ok:true},
+  {id:'lawson_32',store:'lawson',cat:'スープ',name:'食物繊維が摂れる 地鶏出汁の和風スープ',kcal:77,p:6.7,f:1.4,c:11.2,note:'低脂質で食物繊維。だしが効いた和風スープ',ok:true},
+  {id:'lawson_33',store:'lawson',cat:'スープ',name:'旨辛スンドゥブ',kcal:135,p:11.5,f:6.7,c:8.5,note:'豆腐でたんぱく質。辛みで満足感',ok:true},
+  {id:'lawson_34',store:'lawson',cat:'主菜',name:'鶏から揚げ むね肉',kcal:266,p:31.9,f:10.0,c:12.6,note:'むね肉のから揚げでたんぱく質32g',ok:true},
+  {id:'lawson_35',store:'lawson',cat:'副菜',name:'えんどう豆スナック バター醤油味',kcal:179,p:11.7,f:7.2,c:18.8,note:'えんどう豆スナックで植物性たんぱく。おやつに',ok:true},
+  {id:'lawson_36',store:'lawson',cat:'麺',name:'こだわりおだしの生パスタ 桜島どりと九条ねぎ',kcal:447,p:24.4,f:6.3,c:75.5,note:'生パスタで高たんぱく。だしが効いた一品',ok:true},
+  {id:'lawson_37',store:'lawson',cat:'パン',name:'大豆粉のチョコ蒸しケーキ',kcal:202,p:10.4,f:11.4,c:16.2,note:'低糖質の甘いもの。間食に',ok:true},
+  {id:'lawson_38',store:'lawson',cat:'主菜',name:'サラダチキン（タンドリー）',kcal:106,p:15.1,f:4.1,c:2.4,note:'スパイスで満足感。味変に',ok:true},
+  {id:'lawson_39',store:'lawson',cat:'麺',name:'こだわりおだし 醤油きのこの生パスタ',kcal:503,p:25.4,f:16.4,c:67.2,note:'だし醤油ときのこの生パスタ。ボリューム◎',ok:true},
+  {id:'lawson_40',store:'lawson',cat:'サラダ',name:'たんぱく質たっぷり 棒棒鶏ボウルサラダ',kcal:234,p:20.4,f:13.7,c:9.4,note:'棒棒鶏でたんぱく質。食べごたえボウルサラダ',ok:true},
+  {id:'lawson_41',store:'lawson',cat:'副菜',name:'冷奴（小ねぎ）',kcal:129,p:11.6,f:6.3,c:7.0,note:'植物性たんぱく。あと一品',ok:true},
+  {id:'lawson_42',store:'lawson',cat:'主菜',name:'からあげクン レギュラー',kcal:226,p:14.4,f:15.4,c:7.8,note:'定番のからあげクン。たんぱく質補給に（脂質やや高め）',ok:true},
+  {id:'lawson_43',store:'lawson',cat:'ご飯',name:'焼き鮭の幕の内弁当',kcal:496,p:17.5,f:12.0,c:81.6,note:'焼き鮭中心の王道弁当。魚のたんぱく質',ok:true},
+  {id:'lawson_44',store:'lawson',cat:'主菜',name:'からあげクン レッド',kcal:225,p:14.3,f:15.1,c:8.1,note:'ピリ辛のからあげクン（脂質やや高め）',ok:true},
+  {id:'lawson_45',store:'lawson',cat:'主菜',name:'あじの南蛮漬け',kcal:195,p:9.8,f:10.0,c:16.0,note:'青魚のたんぱく質。さっぱり',ok:true},
+  {id:'lawson_46',store:'lawson',cat:'サラダ',name:'海老とブロッコリーのサラダ',kcal:157,p:6.7,f:9.6,c:12.3,note:'海老＆ブロッコリーで低脂質・高たんぱく',ok:true},
+  {id:'lawson_47',store:'lawson',cat:'副菜',name:'おでん 大根',kcal:12,p:0.3,f:0.1,c:3.1,note:'ほぼゼロカロリー。かさ増しに',ok:true},
+  {id:'lawson_48',store:'lawson',cat:'スープ',name:'たんぱく質が摂れる 鶏白湯スープ',kcal:249,p:22.7,f:8.2,c:27.8,note:'鶏でたんぱく質。飲みごたえ',ok:true},
+  {id:'lawson_49',store:'lawson',cat:'サラダ',name:'食物繊維が摂れる 豆腐とひじきの和風サラダ',kcal:95,p:5.4,f:4.4,c:10.6,note:'豆腐＋ひじきで食物繊維。和風サラダ',ok:true},
+  {id:'lawson_50',store:'lawson',cat:'パン',name:'ピザロール ハム＆チーズ',kcal:192,p:10.7,f:5.9,c:24.9,note:'ハム＆チーズのピザロール。片手で',ok:true},
+
+  /* ===== ファミリーマート（概算・要確認） ===== */
+  {id:'famima_01',store:'famima',cat:'ご飯',name:'熟成米おむすび 紅鮭',kcal:168,p:4.3,f:1.5,c:34.6,note:'定番の鮭おむすび。脂質控えめで主食に',ok:true},
+  {id:'famima_02',store:'famima',cat:'ご飯',name:'もち麦入り 昆布おにぎり',kcal:189,p:3.2,f:1.1,c:41.9,note:'もち麦で食物繊維。あっさり',ok:true},
+  {id:'famima_03',store:'famima',cat:'ご飯',name:'おかか入り 玉子太巻寿司',kcal:273,p:8.1,f:4.8,c:49.6,note:'玉子入りの太巻。脂質控えめで満足感',ok:true},
+  {id:'famima_04',store:'famima',cat:'ご飯',name:'サンド寿司 サーモン（鮭だし入り）',kcal:231,p:6.4,f:3.3,c:44.5,note:'サーモンで良質な脂。脂質控えめの寿司',ok:true},
+  {id:'famima_05',store:'famima',cat:'ご飯',name:'手巻寿司 海鮮ばくだん納豆',kcal:170,p:4.8,f:1.7,c:34.3,note:'納豆＋海鮮のネバネバ。低脂質',ok:true},
+  {id:'famima_06',store:'famima',cat:'ご飯',name:'手巻寿司 青しそ納豆',kcal:174,p:5.5,f:2.1,c:34.1,note:'青しそ＋納豆でさっぱり。低脂質',ok:true},
+  {id:'famima_07',store:'famima',cat:'ご飯',name:'鶏のうまみ！鶏そぼろ弁当',kcal:361,p:10.8,f:6.5,c:65.2,note:'鶏そぼろでたんぱく質。1食で完結',ok:true},
+  {id:'famima_08',store:'famima',cat:'ご飯',name:'手巻 辛子明太子',kcal:175,p:4.1,f:1.4,c:36.7,note:'明太子の手巻。脂質控えめの定番',ok:true},
+  {id:'famima_09',store:'famima',cat:'ご飯',name:'天然まぐろのねぎとろ細巻',kcal:295,p:9.8,f:5.1,c:53.2,note:'ねぎとろの細巻。脂質控えめで主食に',ok:true},
+  {id:'famima_10',store:'famima',cat:'麺',name:'冷たい生パスタ 明太カルボナーラ',kcal:401,p:14.3,f:8.2,c:68.3,note:'生パスタで満足感。たんぱく質も摂れる',ok:true},
+  {id:'famima_11',store:'famima',cat:'サラダ',name:'たんぱく質が摂れる！黒胡椒チキンのサラダ',kcal:152,p:15.6,f:7.5,c:6.4,note:'黒胡椒チキンでP15g。低糖質',ok:true},
+  {id:'famima_12',store:'famima',cat:'サラダ',name:'3種のネバネバサラダ',kcal:57,p:2.6,f:1.1,c:11.5,note:'ネバネバ食材で食物繊維。低カロリー',ok:true},
+  {id:'famima_13',store:'famima',cat:'サラダ',name:'たんぱく質が摂れる！豚しゃぶのサラダ',kcal:142,p:13.9,f:6.1,c:8.6,note:'豚しゃぶでP14g。低糖質でメインにも',ok:true},
+  {id:'famima_14',store:'famima',cat:'麺',name:'冷し中華',kcal:414,p:19.2,f:7.6,c:68.3,note:'酸味で食べやすくたんぱく質も',ok:true},
+  {id:'famima_15',store:'famima',cat:'サラダ',name:'シーチキン＆たまごのサラダ',kcal:73,p:6.4,f:3.7,c:4.5,note:'ツナ＋卵でたんぱく質。低カロリー',ok:true},
+  {id:'famima_16',store:'famima',cat:'麺',name:'手打ち風 ざるそば',kcal:314,p:15.9,f:2.9,c:57.9,note:'低脂質でさっぱり。軽めの1食に',ok:true},
+  {id:'famima_17',store:'famima',cat:'主菜',name:'サラダチキン（プレーン）',kcal:116,p:24.9,f:1.5,c:1.2,note:'高たんぱく低脂質の定番。1品足しに',ok:true},
+  {id:'famima_18',store:'famima',cat:'主菜',name:'国産鶏のサラダチキン（タンドリーチキン風）',kcal:142,p:26.5,f:3.5,c:0.6,note:'スパイスで満足感。高たんぱく・糖質ほぼ0',ok:true},
+  {id:'famima_19',store:'famima',cat:'主菜',name:'国産鶏のサラダチキン（3種のハーブ＆スパイス）',kcal:131,p:24.9,f:3.0,c:0.5,note:'ハーブ風味で飽きにくい。高たんぱく・糖質0',ok:true},
+  {id:'famima_20',store:'famima',cat:'主菜',name:'サラダチキンバー（スモークペッパー）',kcal:104,p:10.0,f:6.3,c:2.5,note:'片手で食べられる間食のたんぱく質補給',ok:true},
+  {id:'famima_21',store:'famima',cat:'主菜',name:'炭火焼きとり もも塩',kcal:86,p:13.4,f:3.2,c:0.8,note:'炭火焼きの王道。1本で低カロリー高たんぱく',ok:true},
+  {id:'famima_22',store:'famima',cat:'主菜',name:'国産親鳥の炭火焼（柚子こしょう付）',kcal:189,p:19.1,f:12.0,c:1.1,note:'親鳥の炭火焼でP19g。糖質ほぼ0',ok:true},
+  {id:'famima_23',store:'famima',cat:'サラダ',name:'混ぜて食べるネバネバサラダ（ポン酢味）',kcal:36,p:2.5,f:0.5,c:7.0,note:'ネバネバ＋ポン酢で超低カロリー',ok:true},
+  {id:'famima_24',store:'famima',cat:'サラダ',name:'蒸し鶏のサラダ',kcal:60,p:9.4,f:1.3,c:3.6,note:'蒸し鶏でたんぱく質。低脂質・低カロリー',ok:true},
+  {id:'famima_25',store:'famima',cat:'主菜',name:'国産さばのおろしポン酢',kcal:83,p:9.8,f:3.1,c:4.6,note:'さばでP。おろしポン酢でさっぱり',ok:true},
+  {id:'famima_26',store:'famima',cat:'サラダ',name:'1/2日分の野菜が摂れるサラダ',kcal:67,p:6.0,f:1.2,c:9.9,note:'不足しがちな野菜をまとめて。低脂質',ok:true},
+  {id:'famima_27',store:'famima',cat:'サラダ',name:'ブロッコリーと蒸し鶏のサラダ',kcal:129,p:10.3,f:6.8,c:8.2,note:'噛みごたえ＋たんぱく質10g',ok:true},
+  {id:'famima_28',store:'famima',cat:'サラダ',name:'たんぱく質が摂れる ローストチキンのパスタサラダ',kcal:249,p:15.9,f:6.0,c:34.3,note:'ローストチキンでP16g。食べごたえ',ok:true},
+  {id:'famima_29',store:'famima',cat:'副菜',name:'味付たまご',kcal:72,p:6.4,f:5.1,c:0.8,note:'たんぱく質をあと一歩足すのに便利',ok:true},
+  {id:'famima_30',store:'famima',cat:'スープ',name:'柚子胡椒香る鶏肉と野菜の和風スープ',kcal:87,p:10.5,f:4.2,c:2.2,note:'鶏肉でP。低糖質で温まる',ok:true},
+  {id:'famima_31',store:'famima',cat:'スープ',name:'ふんわりつくねの和風スープ',kcal:169,p:10.8,f:5.1,c:21.4,note:'つくねでP。満足感ある和風スープ',ok:true},
+  {id:'famima_32',store:'famima',cat:'副菜',name:'豆腐バー（プレーン）',kcal:109,p:10.7,f:7.1,c:0.9,note:'大豆のたんぱく質10g。片手でおやつ感覚',ok:true},
+  {id:'famima_33',store:'famima',cat:'副菜',name:'おでん たまご',kcal:76,p:6.3,f:5.1,c:0.5,note:'低カロリーでたんぱく質',ok:true},
+  {id:'famima_34',store:'famima',cat:'副菜',name:'冷奴（薬味）',kcal:131,p:10.9,f:6.2,c:7.2,note:'植物性たんぱく。あと一品に',ok:true},
+  {id:'famima_35',store:'famima',cat:'スープ',name:'具だくさん豚汁',kcal:114,p:9.8,f:3.9,c:10.1,note:'根菜で食べごたえ。低脂質で野菜を補える',ok:true},
+  {id:'famima_36',store:'famima',cat:'スープ',name:'スンドゥブチゲスープ',kcal:144,p:11.2,f:7.8,c:7.7,note:'豆腐でP。辛みで満足感',ok:true},
+  {id:'famima_37',store:'famima',cat:'スープ',name:'野菜を食べる鶏ガラしょうゆスープ',kcal:121,p:8.9,f:4.3,c:13.3,note:'野菜たっぷり＋鶏ガラ。低脂質',ok:true},
+  {id:'famima_38',store:'famima',cat:'副菜',name:'蒸し鶏と塩昆布のやみつきキャベツ',kcal:76,p:5.7,f:3.7,c:5.9,note:'蒸し鶏＋キャベツで低カロリー副菜',ok:true},
+  {id:'famima_39',store:'famima',cat:'スープ',name:'参鶏湯風スープごはん',kcal:238,p:13.0,f:4.3,c:38.9,note:'鶏のうま味でP。温まる1品',ok:true},
+  {id:'famima_40',store:'famima',cat:'麺',name:'もっちり食感の醤油焼うどん',kcal:449,p:16.5,f:8.3,c:78.9,note:'もっちり焼うどん。たんぱく質16gで食べごたえ',ok:true},
+  {id:'famima_41',store:'famima',cat:'パン',name:'国産鶏むね肉とゆで玉子のサンド トマトとハラペーニョのソース',kcal:234,p:14.9,f:8.6,c:25.5,note:'鶏むね＋卵のサンドでたんぱく質15g',ok:true},
+  {id:'famima_42',store:'famima',cat:'麺',name:'鶏の旨みがつまった冷し鶏塩うどん',kcal:333,p:14.6,f:2.7,c:64.3,note:'低脂質で高たんぱく。1食で完結',ok:true},
+  {id:'famima_43',store:'famima',cat:'サラダ',name:'海老とパクチーのヤムウンセン',kcal:90,p:4.3,f:1.3,c:16.4,note:'エスニックな春雨サラダ。低脂質',ok:true},
+  {id:'famima_44',store:'famima',cat:'主菜',name:'炭火焼き鳥 ももたれ',kcal:77,p:7.7,f:4.0,c:2.5,note:'たれ味で満足。たんぱく質を手軽に',ok:true},
+  {id:'famima_45',store:'famima',cat:'麺',name:'たらこパスタ',kcal:285,p:12.3,f:6.2,c:46.3,note:'たらこ風味のパスタ。たんぱく質12g',ok:true},
+  {id:'famima_46',store:'famima',cat:'サラダ',name:'たことブロッコリーのサラダ',kcal:93,p:4.6,f:6.3,c:5.5,note:'たこ＆ブロッコリーで噛みごたえ。低カロリー',ok:true},
+  {id:'famima_47',store:'famima',cat:'副菜',name:'おでん 大根',kcal:6,p:0.5,f:0.0,c:1.0,note:'ほぼゼロカロリー。かさ増しに',ok:true},
+  {id:'famima_48',store:'famima',cat:'主菜',name:'ガーリック醤油グリルチキン',kcal:253,p:20.4,f:9.4,c:22.5,note:'グリルチキンでP20g。しっかりメイン',ok:true},
+  {id:'famima_49',store:'famima',cat:'副菜',name:'ちくわチーズ',kcal:88,p:9.5,f:2.5,c:6.8,note:'ちくわ＋チーズでたんぱく質。おつまみ感覚',ok:true},
+  {id:'famima_50',store:'famima',cat:'パン',name:'国産チキンとチェダーのトーストサンド',kcal:294,p:20.0,f:14.6,c:21.5,note:'チキン＆チェダーでたんぱく質20g',ok:true}
+];
+
+/* ---- メタ ---- */
+const STORES=[
+  {key:'',label:'すべて',cls:'all'},
+  {key:'seven',label:'セブン',cls:'seven'},
+  {key:'lawson',label:'ローソン',cls:'lawson'},
+  {key:'famima',label:'ファミマ',cls:'famima'}
+];
+const STORE_LABEL={seven:'セブン',lawson:'ローソン',famima:'ファミマ'};
+const CATS=[
+  {key:'ご飯',emoji:'🍙'},{key:'パン',emoji:'🥪'},{key:'麺',emoji:'🍜'},
+  {key:'主菜',emoji:'🍗'},{key:'サラダ',emoji:'🥗'},{key:'副菜',emoji:'🥚'},{key:'スープ',emoji:'🍲'}
+];
+const CAT_EMOJI=Object.fromEntries(CATS.map(c=>[c.key,c.emoji]));
+
+const state={store:'',cat:'',q:'',sort:'def'};
+
+const elStores=document.getElementById('stores');
+STORES.forEach(s=>{
+  const b=document.createElement('button');
+  b.className='storebtn '+s.cls; b.textContent=s.label;
+  b.dataset.store=s.key; b.dataset.active=s.key===state.store?'1':'0';
+  b.onclick=()=>{state.store=s.key; [...elStores.children].forEach(x=>x.dataset.active=x.dataset.store===s.key?'1':'0'); render();};
+  elStores.appendChild(b);
+});
+const elCat=document.getElementById('cat');
+CATS.forEach(c=>{const o=document.createElement('option');o.value=c.key;o.textContent=`${c.emoji} ${c.key}`;elCat.appendChild(o);});
+elCat.onchange=e=>{state.cat=e.target.value;render();};
+document.getElementById('sort').onchange=e=>{state.sort=e.target.value;render();};
+document.getElementById('q').oninput=e=>{state.q=e.target.value.trim();render();};
+
+const elGrid=document.getElementById('grid');
+const elCount=document.getElementById('count');
+const elEmpty=document.getElementById('empty');
+
+function render(){
+  let list=PRODUCTS.filter(p=>{
+    if(state.store&&p.store!==state.store)return false;
+    if(state.cat&&p.cat!==state.cat)return false;
+    if(state.q){const q=state.q.toLowerCase(); if(!(p.name.toLowerCase().includes(q)||p.note.toLowerCase().includes(q)))return false;}
+    return true;
+  });
+  if(state.sort==='kcal')list.sort((a,b)=>a.kcal-b.kcal);
+  else if(state.sort==='pro')list.sort((a,b)=>b.p-a.p);
+  else if(state.sort==='fat')list.sort((a,b)=>a.f-b.f);
+  elCount.innerHTML=`該当 <b>${list.length}</b> 商品`;
+  elGrid.innerHTML=list.map(card).join('');
+  elEmpty.style.display=list.length?'none':'block';
+}
+
+/* 画像の自動探索：jpg → jpeg → png の順に試し、無ければアイコン表示 */
+function imgFallback(el){
+  const exts=(el.dataset.exts||'').split(',').filter(Boolean);
+  if(exts.length){ const n=exts.shift(); el.dataset.exts=exts.join(','); el.src=el.dataset.base+'.'+n; }
+  else { el.remove(); }
+}
+function card(p){
+  const emoji=CAT_EMOJI[p.cat]||'🍱';
+  const check=p.ok?'':`<div class="badge-check">要確認</div>`;
+  const imgTag = p.img
+    ? `<img src="${p.img}" alt="${escapeHtml(p.name)}" loading="lazy" onerror="this.remove()">`
+    : `<img src="商品画像/${p.id}.jpg" data-base="商品画像/${p.id}" data-exts="jpeg,png" alt="${escapeHtml(p.name)}" loading="lazy" onerror="imgFallback(this)">`;
+  return `
+  <article class="cardproduct">
+    <div class="thumb">
+      <span class="emoji">${emoji}</span>
+      ${imgTag}
+      <div class="badge-store ${p.store}">${STORE_LABEL[p.store]}</div>
+      ${check}
+    </div>
+    <div class="pbody">
+      <span class="cat">${emoji} ${p.cat}</span>
+      <div class="pname">${escapeHtml(p.name)}</div>
+      <div class="stats">
+        <div class="stat kcal"><div class="k">カロリー</div><div class="v">${p.kcal}<small>kcal</small></div></div>
+        <div class="stat pro"><div class="k">たんぱく質</div><div class="v">${p.p}<small>g</small></div></div>
+        <div class="stat"><div class="k">脂質</div><div class="v">${p.f}<small>g</small></div></div>
+        <div class="stat"><div class="k">炭水化物</div><div class="v">${p.c}<small>g</small></div></div>
+      </div>
+      <div class="note">${escapeHtml(p.note)}</div>
+    </div>
+  </article>`;
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+render();
+</script>
+</body>
+</html>
